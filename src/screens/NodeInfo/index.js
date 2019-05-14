@@ -1,14 +1,23 @@
-import React from 'react';
-import { Table } from 'react-bootstrap';
-import './style.css';
-import Loading from '../../components/Loading';
+import React from "react";
+import { Table } from "react-bootstrap";
+import "./style.css";
+import Loading from "../../components/Loading";
 export default class NodeInfo extends React.Component {
   constructor() {
     super();
     this.state = {
-      data: { name: 'Cường', School: 'Đại học bách khoa hà nội' }
+      data: { name: "Cường", School: "Đại học bách khoa hà nội" }
     };
   }
+  getInfoSuccess = response => {
+    // console.log(response);
+    this.setState({ data: response.data });
+  };
+  getInfoError = error => {
+    // console.log(error);
+    alert(JSON.stringify(error));
+  };
+
   renderInfo = () => {
     if (this.state.data) {
       return Object.keys(this.state.data).map(item => {
@@ -43,6 +52,12 @@ export default class NodeInfo extends React.Component {
             <tbody>{this.renderInfo()}</tbody>
           </Table>
         </div>
+        <Loading
+          url="/info/getInfo"
+          autoLoading
+          onSuccess={this.getInfoSuccess}
+          onError={this.getInfoError}
+        />
       </div>
     );
   }
