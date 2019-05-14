@@ -43,6 +43,7 @@ export default class NodeInfo extends React.Component {
             <tbody>{this.renderInfo()}</tbody>
           </Table>
         </div>
+        <Loading />
       </div>
     );
   }
