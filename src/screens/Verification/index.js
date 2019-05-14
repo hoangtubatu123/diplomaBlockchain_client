@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class NodeInfo extends React.Component {
+export default class Verification extends React.Component {
   render() {
     return (
       <div>

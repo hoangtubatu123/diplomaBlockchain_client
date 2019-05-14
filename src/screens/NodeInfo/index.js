@@ -1,11 +1,48 @@
 import React from 'react';
-
+import { Table } from 'react-bootstrap';
+import './style.css';
+import Loading from '../../components/Loading';
 export default class NodeInfo extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      data: { name: 'Cường', School: 'Đại học bách khoa hà nội' }
+    };
+  }
+  renderInfo = () => {
+    if (this.state.data) {
+      return Object.keys(this.state.data).map(item => {
+        return (
+          <tr>
+            <td>{item}</td>
+            <td>{this.state.data[item]}</td>
+          </tr>
+        );
+      });
+    }
+    return null;
+  };
   render() {
     return (
-      <div>
-        <h1>This is NodeInfo page.</h1>
-        <h2>Hi~~~</h2>
+      <div class="row">
+        <div
+          class="col-sm-6"
+          style={{
+            marginTop: 100,
+            paddingLeft: 30,
+            paddingRight: 10
+          }}
+        >
+          <Table striped bordered hover responsive size="sm">
+            <thead>
+              <tr>
+                <th>Thông tin</th>
+                <th>Đặc điểm</th>
+              </tr>
+            </thead>
+            <tbody>{this.renderInfo()}</tbody>
+          </Table>
+        </div>
       </div>
     );
   }
