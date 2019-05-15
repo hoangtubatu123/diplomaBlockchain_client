@@ -1,8 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 import { Spinner } from 'react-bootstrap';
-import constants from '../../constants';
-
+import { normalAPI } from './API';
 export default class Loading extends React.Component {
   static defaultProps = {
     method: 'GET'
@@ -10,7 +8,7 @@ export default class Loading extends React.Component {
   constructor() {
     super();
     this.state = {
-      isLoading: true
+      isLoading: false
     };
   }
   componentDidMount() {
@@ -19,26 +17,37 @@ export default class Loading extends React.Component {
       this.requestAPI();
     }
   }
-  requestAPI = () => {
-    const { onSuccess, onError, url, params, method } = this.props;
+  requestAPI = params => {
+    const { onSuccess, onError, url, method, isFormData } = this.props;
     this.setState({ isLoading: true });
-    axios({
-      method: method,
-      headers: { 'content-type': 'application/json' },
-      url: constants.BASE_URL + url,
-      data: params
-    })
-      .then(response => {
-        this.setState({ isLoading: false });
-        onSuccess && onSuccess(response);
-      })
-      .catch(error => {
-        this.setState({ isLoading: false });
-        onError && onError(error);
-      });
+    if (!isFormData) {
+      const config = {
+        method: method,
+        responseType: 'json',
+        url: url
+      };
+      if (params) {
+        if (method === 'POST') {
+          config['data'] = params;
+        } else {
+          config['params'] = params;
+        }
+      }
+
+      return normalAPI(config)
+        .then(res => {
+          this.setState({ isLoading: false });
+          onSuccess && onSuccess(res);
+        })
+        .catch(error => {
+          this.setState({ isLoading: false });
+
+          onError && onError(error);
+        });
+    }
   };
   render() {
-    if (this.state.isLoading) {
+    if (this.state.isLoading && !this.props.invisible) {
       return (
         <div
           style={{
