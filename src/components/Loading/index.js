@@ -1,6 +1,6 @@
 import React from 'react';
 import { Spinner } from 'react-bootstrap';
-import { normalAPI } from './API';
+import { normalAPI, formDataAPI } from './API';
 export default class Loading extends React.Component {
   static defaultProps = {
     method: 'GET'
@@ -20,21 +20,31 @@ export default class Loading extends React.Component {
   requestAPI = params => {
     const { onSuccess, onError, url, method, isFormData } = this.props;
     this.setState({ isLoading: true });
-    if (!isFormData) {
-      const config = {
-        method: method,
-        responseType: 'json',
-        url: url
-      };
-      if (params) {
-        if (method === 'POST') {
-          config['data'] = params;
-        } else {
-          config['params'] = params;
-        }
+    const config = {
+      method: method,
+      responseType: 'json',
+      url: url
+    };
+    if (params) {
+      if (method === 'POST') {
+        config['data'] = params;
+      } else {
+        config['params'] = params;
       }
-
+    }
+    if (!isFormData) {
       return normalAPI(config)
+        .then(res => {
+          this.setState({ isLoading: false });
+          onSuccess && onSuccess(res);
+        })
+        .catch(error => {
+          this.setState({ isLoading: false });
+
+          onError && onError(error);
+        });
+    } else {
+      return formDataAPI(config)
         .then(res => {
           this.setState({ isLoading: false });
           onSuccess && onSuccess(res);

@@ -25,10 +25,6 @@ export default class Issue extends React.Component {
     }
   };
   onSuccess = response => {
-    console.log(response);
-    if (this.download && this.download.current) {
-      this.download.current.requestAPI();
-    }
   };
   onError = error => {
     alert(JSON.stringify(error));
