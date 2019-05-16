@@ -33,7 +33,7 @@ export default class NodeInfo extends React.Component {
       return this.state.addresses.map((index, item) => {
         return (
           <tr>
-            <td>{index + 1}</td>
+            <td>{`Address${index + 1}`}</td>
             <td>{item}</td>
           </tr>
         );

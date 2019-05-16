@@ -18,14 +18,14 @@ export default class Issue extends React.Component {
       expire: this.year.value || '',
       readingPoint: this.readingPoint.value || '',
       listeningPoint: this.readingPoint.value || '',
-      totalPoint: this.totalPoint.value || ''
+      totalPoint: this.totalPoint.value || '',
+      address: this.address.value || ''
     };
     if (this.loading && this.loading.current) {
       this.loading.current.requestAPI(params);
     }
   };
-  onSuccess = response => {
-  };
+  onSuccess = response => {};
   onError = error => {
     alert(JSON.stringify(error));
   };
@@ -108,7 +108,13 @@ export default class Issue extends React.Component {
                   />
                 </Form.Group>
               </Form.Row>
-
+              <Form.Group>
+                <Form.Label>Địa chỉ ví</Form.Label>
+                <Form.Control
+                  placeholder="địa chỉ ví"
+                  ref={ref => (this.address = ref)}
+                />
+              </Form.Group>
               <Form.Group id="formGridCheckbox">
                 <Form.Check type="checkbox" label="Check me out" />
               </Form.Group>
