@@ -30,10 +30,10 @@ export default class NodeInfo extends React.Component {
 
   renderAddresses = () => {
     if (this.state.addresses.length !== 0) {
-      return this.state.addresses.map((index, item) => {
+      return this.state.addresses.map((item, index) => {
         return (
           <tr>
-            <td>{`Address${index + 1}`}</td>
+            <td>{`Address ${index}`}</td>
             <td>{item}</td>
           </tr>
         );

@@ -32,7 +32,7 @@ export default class Error extends React.Component {
             <hr />
             <div className="d-flex justify-content-end">
               <Button onClick={this.onHide} variant="outline-error">
-                Close me ya'll!
+                Thử lại
               </Button>
             </div>
           </Alert>

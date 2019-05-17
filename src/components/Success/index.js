@@ -1,5 +1,5 @@
-import React from 'react';
-import { Alert, Button } from 'react-bootstrap';
+import React from "react";
+import { Alert, Button } from "react-bootstrap";
 export default class Success extends React.Component {
   constructor() {
     super();
@@ -18,26 +18,27 @@ export default class Success extends React.Component {
       return (
         <div
           style={{
-            zIndex: '1',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%',
-            width: '100%'
+            zIndex: "1",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            width: "100%"
           }}
         >
           <Alert variant="success">
             <Alert.Heading>Thông báo</Alert.Heading>
-            <p>{'Thành công'}</p>
+            <p>{"Thành công"}</p>
             <hr />
             <div className="d-flex justify-content-end">
-              <Button onClick={this.onHideError} variant="outline-success">
-                Close me ya'll!
+              <Button onClick={this.onHide} variant="outline-success">
+                Quay lại với trang web
               </Button>
             </div>
           </Alert>
         </div>
       );
     }
+    return null;
   }
 }
