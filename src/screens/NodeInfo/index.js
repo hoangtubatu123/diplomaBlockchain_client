@@ -9,7 +9,7 @@ export default class NodeInfo extends React.Component {
     this.error = React.createRef();
     this.state = {
       data: { name: 'Cường', School: 'Đại học bách khoa hà nội' },
-      addresses: []
+      addresses: {}
     };
   }
   getAddressSuccess = response => {
@@ -29,12 +29,12 @@ export default class NodeInfo extends React.Component {
   };
 
   renderAddresses = () => {
-    if (this.state.addresses.length !== 0) {
-      return this.state.addresses.map((index, item) => {
+    if (this.state.addresses) {
+      return Object.keys(this.state.addresses).map(item => {
         return (
           <tr>
-            <td>{`Address${index + 1}`}</td>
             <td>{item}</td>
+            <td>{this.state.data[item]}</td>
           </tr>
         );
       });

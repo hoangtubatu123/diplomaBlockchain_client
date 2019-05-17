@@ -7,19 +7,22 @@ class NavBar extends Component {
         <Navbar.Brand href="#home">Multichain</Navbar.Brand>
         <Nav className="mr-auto">
           <div style={{ paddingLeft: 10 }}>
-            <Nav.Link href="/">Info</Nav.Link>
+            <Nav.Link href="/">Thông tin</Nav.Link>
           </div>
 
           <div style={{ paddingLeft: 10 }}>
-            <Nav.Link href="/permissions">Permission</Nav.Link>
+            <Nav.Link href="/permissions">Quyền</Nav.Link>
           </div>
 
           <div style={{ paddingLeft: 10 }}>
-            <Nav.Link href="/issue">Issue</Nav.Link>
+            <Nav.Link href="/issue">Phát hành</Nav.Link>
           </div>
 
           <div style={{ paddingLeft: 10 }}>
-            <Nav.Link href="/verification">Verification</Nav.Link>
+            <Nav.Link href="/verification">Xác thực</Nav.Link>
+          </div>
+          <div style={{ paddingLeft: 10 }}>
+            <Nav.Link href="/list-diploma">Danh sách</Nav.Link>
           </div>
         </Nav>
         <Form inline>
