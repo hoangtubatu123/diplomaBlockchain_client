@@ -109,7 +109,7 @@ export default class Issue extends React.Component {
                 </Form.Group>
               </Form.Row>
               <Form.Group>
-                <Form.Label>Địa chỉ ví</Form.Label>
+                <Form.Label>Địa chỉ ví sinh viên</Form.Label>
                 <Form.Control
                   placeholder="địa chỉ ví"
                   ref={ref => (this.address = ref)}

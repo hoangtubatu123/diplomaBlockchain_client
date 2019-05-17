@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import $ from 'jquery';
 import Loading from '../../components/Loading';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 export default class Verification extends React.Component {
   constructor() {
     super();
@@ -25,6 +25,7 @@ export default class Verification extends React.Component {
     }
     let bodyFromData = new FormData();
     bodyFromData.append('file', this.file);
+    bodyFromData.append('address', this.address.value || '');
     if (this.submit && this.submit.current) {
       this.submit.current.requestAPI(bodyFromData);
     }
@@ -48,6 +49,13 @@ export default class Verification extends React.Component {
           </button>
           <span class="file-info">{this.state.fileInfo}</span>
         </div>
+        <Form.Group style={{ paddingTop: 10 }}>
+          <Form.Label>Địa chỉ ví</Form.Label>
+          <Form.Control
+            placeholder="Địa chỉ ví"
+            ref={ref => (this.address = ref)}
+          />
+        </Form.Group>
         <Button
           variant="dark"
           size="lg"
