@@ -38,9 +38,6 @@ export default class Permission extends React.Component {
     return false;
   };
   renderListPermission =() => {
-    return (
-      
-    )
   }
   renderGrantOrRevoke =() => {
      
