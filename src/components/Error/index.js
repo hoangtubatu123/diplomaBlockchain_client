@@ -4,11 +4,16 @@ export default class Error extends React.Component {
   constructor() {
     super();
     this.state = {
-      show: false
+      show: false,
+      message: ''
     };
   }
-  onShow = () => {
-    this.setState({ show: true });
+  onShow = message => {
+    if (message) {
+      this.setState({ message: message, show: true });
+    } else {
+      this.setState({ show: true });
+    }
   };
   onHide = () => {
     this.setState({ show: false });
@@ -28,11 +33,15 @@ export default class Error extends React.Component {
         >
           <Alert variant="danger">
             <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-            <p>{'Đã xảy ra lỗi vui lòng thử lại'}</p>
+            <p>
+              {this.state.message === ''
+                ? 'Đã xảy ra lỗi vui lòng thử lại'
+                : this.state.message}
+            </p>
             <hr />
             <div className="d-flex justify-content-end">
               <Button onClick={this.onHide} variant="outline-error">
-                Thử lại
+                Quay lại trang chủ
               </Button>
             </div>
           </Alert>

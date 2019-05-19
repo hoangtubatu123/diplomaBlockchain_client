@@ -1,33 +1,45 @@
-import React from 'react';
-import './styles.css';
-import { Form, Col, Button } from 'react-bootstrap';
-import Loading from '../../components/Loading';
+import React from "react";
+import "./styles.css";
+import { Form, Col, Button } from "react-bootstrap";
+import Loading from "../../components/Loading";
+import Success from "../../components/Success";
+import Error from "../../components/Error";
 export default class Issue extends React.Component {
   constructor() {
     super();
     this.loading = React.createRef();
-    this.download = React.createRef();
+    this.success = React.createRef();
+    this.error = React.createRef();
   }
   onSubmit = e => {
     e.preventDefault();
     const params = {
-      nameDiploma: this.nameDiploma.value || '',
-      issueSource: this.issueSource.value || '',
-      nameStudent: this.nameStudent.value || '',
-      date: this.date.value || '',
-      expire: this.year.value || '',
-      readingPoint: this.readingPoint.value || '',
-      listeningPoint: this.readingPoint.value || '',
-      totalPoint: this.totalPoint.value || '',
-      address: this.address.value || ''
+      nameDiploma: this.nameDiploma.value || "",
+      issueSource: this.issueSource.value || "",
+      nameStudent: this.nameStudent.value || "",
+      idStudent: this.idStudent.value || "",
+      date: this.date.value || "",
+      expire: this.year.value || "",
+      readingPoint: this.readingPoint.value || "",
+      listeningPoint: this.readingPoint.value || "",
+      totalPoint: this.totalPoint.value || "",
+      publicKeyStudent: this.publicKeyStudent.value || ""
     };
     if (this.loading && this.loading.current) {
       this.loading.current.requestAPI(params);
     }
   };
-  onSuccess = response => {};
+  onSuccess = response => {
+    if (this.success && this.success.current) {
+      this.success.current.onShow("Tạo giấy chứng nhận thành công");
+    }
+  };
   onError = error => {
-    alert(JSON.stringify(error));
+    if (this.error && this.error.current) {
+      this.error.current.onShow(
+        "Đã có lỗi xảy ra trong quá trình tạo giấy chứng nhận"
+      );
+    }
   };
   render() {
     return (
@@ -63,6 +75,13 @@ export default class Issue extends React.Component {
                   <Form.Control
                     placeholder="Họ tên"
                     ref={ref => (this.nameStudent = ref)}
+                  />
+                </Form.Group>
+                <Form.Group as={Col}>
+                  <Form.Label>Mã số</Form.Label>
+                  <Form.Control
+                    placeholder="Mã số sinh viên"
+                    ref={ref => (this.idStudent = ref)}
                   />
                 </Form.Group>
               </Form.Row>
@@ -108,11 +127,12 @@ export default class Issue extends React.Component {
                   />
                 </Form.Group>
               </Form.Row>
+
               <Form.Group>
-                <Form.Label>Địa chỉ ví</Form.Label>
+                <Form.Label>Mã khóa sinh viên</Form.Label>
                 <Form.Control
-                  placeholder="địa chỉ ví"
-                  ref={ref => (this.address = ref)}
+                  placeholder="mã khóa public"
+                  ref={ref => (this.publicKeyStudent = ref)}
                 />
               </Form.Group>
               <Form.Group id="formGridCheckbox">
@@ -138,7 +158,8 @@ export default class Issue extends React.Component {
           onError={this.onError}
           method="POST"
         />
-        <Loading url="/diploma/download" ref={this.download} invisible />
+        <Success ref={this.success} />
+        <Error ref={this.error} />
       </div>
     );
   }

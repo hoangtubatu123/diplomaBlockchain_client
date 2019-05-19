@@ -4,11 +4,16 @@ export default class Success extends React.Component {
   constructor() {
     super();
     this.state = {
-      show: false
+      show: false,
+      message: ""
     };
   }
-  onShow = () => {
-    this.setState({ show: true });
+  onShow = message => {
+    if (message) {
+      this.setState({ show: true, message: message });
+    } else {
+      this.setState({ show: true });
+    }
   };
   onHide = () => {
     this.setState({ show: false });
@@ -28,7 +33,9 @@ export default class Success extends React.Component {
         >
           <Alert variant="success">
             <Alert.Heading>Thông báo</Alert.Heading>
-            <p>{"Thành công"}</p>
+            <p>
+              {this.state.message !== "" ? this.state.message : "Thành công"}
+            </p>
             <hr />
             <div className="d-flex justify-content-end">
               <Button onClick={this.onHide} variant="outline-success">

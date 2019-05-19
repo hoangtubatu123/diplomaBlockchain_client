@@ -4,7 +4,7 @@ import Issue from '../Issue';
 import NodeInfo from '../NodeInfo';
 import Permission from '../Permissions';
 import Verification from '../Verification';
-
+import ListDiploma from '../ListDiploma';
 export default class Container extends React.Component {
   render() {
     return (
@@ -14,6 +14,7 @@ export default class Container extends React.Component {
           <Route path="/permissions" component={Permission} />
           <Route path="/issue" component={Issue} />
           <Route path="/verification" component={Verification} />
+          <Route path="/list-diploma" component={ListDiploma} />
         </Switch>
       </div>
     );
